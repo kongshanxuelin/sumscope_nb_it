@@ -1,6 +1,6 @@
 [![QQ](http://pub.idqqimg.com/wpa/images/group.png)](https://jq.qq.com/?_wv=1027&k=5HWgxBZ)
 
-Sumslack团队公众号技术文章代码整理
+Sumslack团队公众号技术文章代码
 ===================
 
 欢迎加入QQ群讨论（群号：604844003）
