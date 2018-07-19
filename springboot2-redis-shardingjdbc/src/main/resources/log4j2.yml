@@ -1,0 +1,46 @@
+Configuration:  
+  status: warn  
+  packages: com.sumslack.netty.logging
+  Properties: 
+    Property:         
+      - name: log.path  
+        value: F:/git/sumslack-cloud/cloud-consumer/consumer-fin-index/logs
+      - name: project.name  
+        value: fin-consumer-log  
+  Appenders:
+      Console:
+        name: CONSOLE
+        target: SYSTEM_OUT
+        PatternLayout:
+          pattern: "%d{yyyy-MM-dd HH:mm:ss,SSS}:%4p %t (%F:%L) - %m%n"
+      RollingFile:
+        - name: ROLLING_FILE
+          ignoreExceptions: false
+          fileName: ${log.path}/${project.name}.log
+          filePattern: "${log.path}/$${date:yyyy-MM}/${project.name} -%d{yyyy-MM-dd}-%i.log.gz"
+          PatternLayout:
+            pattern: "%d{yyyy-MM-dd HH:mm:ss,SSS}:%4p %t (%F:%L) - %m%n"
+          Policies:
+            SizeBasedTriggeringPolicy:
+              size: "256 MB"
+          DefaultRolloverStrategy:
+            max: 1000
+      NettyIOAppender:
+        - name: nettyIOAppender
+          stype: mq
+          host: 122.227.138.62:23105
+          app-name: dubbo.consumer.fin
+  Loggers:
+      Root:
+        level: debug
+        AppenderRef:
+          - ref: CONSOLE
+#          - ref: ROLLING_FILE
+      Logger:
+        - name: com.sumslack.logging
+          additivity: false
+          level: debug
+          AppenderRef:
+            - ref: CONSOLE
+ #           - ref: ROLLING_FILE
+ #           - ref: nettyIOAppender

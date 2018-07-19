@@ -5,4 +5,7 @@
   <version>1.0.0</version>
   <packaging>pom</packaging>
   <description>sumscope_nb_it 公众号技术文章代码库</description>
+  <modules>
+  	<module>springboot2-redis-shardingjdbc</module>
+  </modules>
 </project>
