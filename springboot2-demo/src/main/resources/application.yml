@@ -1,0 +1,119 @@
+server:
+  port: 9333
+spring:
+  profiles:
+    active: dev
+    
+sumslack:
+    listwhite: 0:0:0:0:0:0:0:1,openapi.sumslack.com,wstest.idbhost.com/openapi  
+    apidomain: http://wstest.idbhost.com
+    
+mybatis-plus:
+    mapper-locations: classpath:/com/sumslack/test/mapper/*Mapper.xml
+    typeAliasesPackage: com.sumslack.test.entity
+    global-config:
+        #主键类型  0:"数据库ID自增", 1:"用户输入ID",2:"全局唯一ID (数字类型唯一ID)", 3:"全局唯一ID UUID"
+        id-type: 3
+        #字段策略 0:"忽略判断",1:"非 NULL 判断"),2:"非空判断"
+        field-strategy: 2
+        #驼峰下划线转换
+        db-column-underline: true
+        #mp2.3+ 全局表前缀 mp_
+        table-prefix: base_
+        #刷新mapper 调试神器
+        #refresh-mapper: true
+        #数据库大写下划线转换
+        #capital-mode: true
+        # Sequence序列接口实现类配置
+        #key-generator: com.baomidou.mybatisplus.incrementer.OracleKeyGenerator
+        #逻辑删除配置（下面3个配置）
+        #logic-delete-value: 1
+        #logic-not-delete-value: 0
+        #sql-injector: com.baomidou.mybatisplus.mapper.LogicSqlInjector
+        #自定义填充策略接口实现
+        #meta-object-handler: com.baomidou.springboot.MyMetaObjectHandler
+    configuration:
+        #配置返回数据库(column下划线命名&&返回java实体是驼峰命名)，自动匹配无需as（没开启这个，SQL需要写as： select user_id as userId） 
+        map-underscore-to-camel-case: true
+        cache-enabled: false
+        #配置JdbcTypeForNull, oracle数据库必须配置
+        #jdbc-type-for-null: 'null'
+        
+---
+spring:
+  profiles: dev
+  redis:
+    database: 0
+    host: 192.168.1.63
+    port: 6379
+    timeout: 10000
+    password: 1qaz2wsx
+    jedis:
+      pool:
+        max-active: 20
+        max-wait: -1
+        max-idle: 20
+        min-idle: 8
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://192.168.1.215:3306/springboot-demo?useUnicode=true&characterEncoding=utf8&autoReconnect=true
+    username: dev
+    password: 123456
+    druid:
+        initial-size: 1
+        min-idle: 1
+        max-active: 20
+        # 配置获取连接等待超时的时间
+        max-wait: 60000
+        # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+        time-between-eviction-runs-millis: 60000
+        # 配置一个连接在池中最小生存的时间，单位是毫秒
+        min-evictable-idle-time-millis: 300000
+        validation-query: SELECT 1
+        test-while-idle: true
+        test-on-borrow: false
+        test-on-return: false
+        # 打开PSCache，并且指定每个连接上PSCache的大小
+        pool-prepared-statements: true
+        max-pool-prepared-statement-per-connection-size: 20
+        # 配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
+        filters: stat,wall
+        # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
+        connection-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+        # 合并多个DruidDataSource的监控数据
+        #use-global-data-source-stat: true
+
+      
+dubbo:
+  application:
+    id: fx-dubbo-demo
+    name: fx-dubbo-demo
+    qos-enable: true
+    qos-port: 22222
+  registry:
+    id: fx-dubbo-test
+    protocol: zookeeper
+    address: 192.168.1.213:2181
+  protocol:
+    id: dubbo
+    name: dubbo
+    port: 20881
+    status: server
+    
+endpoints:
+  dubbo:
+    enabled: true  
+    
+management:
+  health:
+    dubbo:
+      status:
+        defaults: memory
+        
+---
+spring:
+  profiles: test
+---
+spring:
+  profiles: prd      
