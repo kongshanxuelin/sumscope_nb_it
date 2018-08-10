@@ -6,7 +6,7 @@
     <version>1.0.0</version>
   </parent>
   <groupId>com.sumslack.dubbo.api</groupId>
-  <artifactId>fenci</artifactId>
+  <artifactId>fenci-api</artifactId>
   <dependencies>
   	<!--工具类 -->
 	<dependency>

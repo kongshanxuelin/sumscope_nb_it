@@ -19,8 +19,6 @@ import com.sumslack.dubbo.provider.fenci.tokener.ResponseTokener;
 import com.sumslack.dubbo.provider.fenci.tokener.TokenerChain;
 import com.sumslack.dubbo.provider.fenci.tokener.VolTokener;
 
-import cn.hutool.core.bean.BeanUtil;
-
 @Service(version = "1.0.0", timeout = 10000)
 public class NCDServiceImpl implements NCDService{
 

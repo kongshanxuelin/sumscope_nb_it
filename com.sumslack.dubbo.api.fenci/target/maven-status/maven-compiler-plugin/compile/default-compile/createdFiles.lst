@@ -1,0 +1,4 @@
+com\sumslack\dubbo\api\fenci\bean\TermBean.class
+com\sumslack\dubbo\api\fenci\bean\TermResponseBean.class
+com\sumslack\dubbo\api\fenci\TokenerService.class
+com\sumslack\dubbo\api\fenci\NCDService.class
