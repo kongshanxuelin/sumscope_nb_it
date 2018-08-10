@@ -1,0 +1,105 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.sumslack</groupId>
+    <artifactId>gzh</artifactId>
+    <version>1.0.0</version>
+  </parent>
+  <groupId>com.sumslack.dubbo</groupId>
+  <artifactId>fenci</artifactId>
+  <properties>
+	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	<zkclient.version>0.2</zkclient.version>
+	<zookeeper.version>3.4.9</zookeeper.version>
+  </properties>
+  
+  <dependencies>
+ 	<dependency>
+		<groupId>com.alibaba.boot</groupId>
+		<artifactId>dubbo-spring-boot-starter</artifactId>
+		<version>0.2.0</version>
+	</dependency>
+	<!-- ZK -->
+	<dependency>
+		<groupId>org.apache.zookeeper</groupId>
+		<artifactId>zookeeper</artifactId>
+		<version>${zookeeper.version}</version>
+		<exclusions>
+			<exclusion>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-log4j12</artifactId>
+			</exclusion>
+		</exclusions>
+	</dependency>
+
+	<!--工具类 -->
+	<dependency>
+		<groupId>cn.hutool</groupId>
+		<artifactId>hutool-all</artifactId>
+		<version>4.0.10</version>
+	</dependency>
+	
+	<dependency>
+		<groupId>com.101tec</groupId>
+		<artifactId>zkclient</artifactId>
+		<version>${zkclient.version}</version>
+		<exclusions>
+			<exclusion>
+				<artifactId>slf4j-api</artifactId>
+				<groupId>org.slf4j</groupId>
+			</exclusion>
+			<exclusion>
+				<artifactId>log4j</artifactId>
+				<groupId>log4j</groupId>
+			</exclusion>
+			<exclusion>
+				<artifactId>slf4j-log4j12</artifactId>
+				<groupId>org.slf4j</groupId>
+			</exclusion>
+		</exclusions>
+	</dependency>
+	<dependency>
+		<groupId>junit</groupId>
+		<artifactId>junit</artifactId>
+		<version>3.8.1</version>
+		<scope>test</scope>
+	</dependency>
+	
+	<!-- API接口项目依赖 -->
+	<dependency>
+		<groupId>com.sumslack.dubbo.api</groupId>
+		<artifactId>fenci</artifactId>
+	    <version>1.0.0</version>
+	</dependency>	
+	
+	<!-- 业务依赖包 -->
+	<dependency>
+	    <groupId>com.hankcs</groupId>
+	    <artifactId>hanlp</artifactId>
+	    <version>portable-1.6.4</version>
+	</dependency>	
+	
+  </dependencies>
+  <build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<skip>true</skip>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-deploy-plugin</artifactId>
+				<configuration>
+					<skip>true</skip>
+				</configuration>
+			</plugin>
+		</plugins>
+  </build>
+</project>
