@@ -18,6 +18,8 @@ public class ProviderFenciLaunch {
 		LexiconUtility.setAttribute("vol", natureVol);
 		Nature naturePri = Nature.create("pri");//价格
 		LexiconUtility.setAttribute("pri", naturePri);
+		Nature shibor = Nature.create("shibor");//评级
+		LexiconUtility.setAttribute("shibor", shibor);
 		Nature naturePj = Nature.create("pj");//评级
 		LexiconUtility.setAttribute("pj", naturePj);
 		

@@ -12,6 +12,7 @@ import com.sumslack.dubbo.api.fenci.bean.TermBean;
 import com.sumslack.dubbo.api.fenci.bean.TermResponseBean;
 import com.sumslack.dubbo.provider.fenci.tokener.BankTokerner;
 import com.sumslack.dubbo.provider.fenci.tokener.DeadlineTokener;
+import com.sumslack.dubbo.provider.fenci.tokener.PriceShiborTokener;
 import com.sumslack.dubbo.provider.fenci.tokener.PriceTokener;
 import com.sumslack.dubbo.provider.fenci.tokener.RateTokener;
 import com.sumslack.dubbo.provider.fenci.tokener.RequestTokener;
@@ -34,6 +35,7 @@ public class NCDServiceImpl implements NCDService{
 				
 				chain
 				.addFilter(new BankTokerner())
+				.addFilter(new PriceShiborTokener())
 				.addFilter(new DeadlineTokener())
 				.addFilter(new VolTokener())
 				.addFilter(new PriceTokener())

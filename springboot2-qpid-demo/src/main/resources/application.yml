@@ -1,0 +1,6 @@
+qpid:
+  topic: topicTest  
+  url: amqp://guest:guest@test/?brokerlist='tcp://192.168.1.63:5672?connectdelay=2000&retries=100&connecttimeout=3600000'
+  queue:
+      req: reqTest
+      reply: replyTest
