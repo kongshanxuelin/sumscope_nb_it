@@ -16,5 +16,6 @@
   	<module>com.sumslack.dubbo.fenci</module>
   	<module>com.sumslack.dubbo.api.fenci</module>
   	<module>springboot2-qpid-demo</module>
+  	<module>java-patterndesign</module>
   </modules>
 </project>
