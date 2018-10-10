@@ -29,8 +29,8 @@ public class DBService {
 	
 	public static String fmt_datetimeFormat = "yyyy-MM-dd HH:mm:ss";
 	public static final class SQL {
-		public static final String LOG_ADD = "insert into `t_logging`(log_id,c,m,d,args,ip,agent,project)"
-				+ "values(?,?,?,?,?,?,?,?)";
+		public static final String LOG_ADD = "insert into `t_logging`(log_id,c,m,d,args,ip,agent,project,app_id,api_id)"
+				+ "values(?,?,?,?,?,?,?,?,?,?)";
 	}
 	
 //	private static DBService instance = new DBService();
@@ -42,8 +42,8 @@ public class DBService {
 //		return instance;
 //	}
 	
-	public void addLogging(long id,String c,String m,String args,String ip,String agent,String project) {
-		executeUpdate(SQL.LOG_ADD, id,c,m,format(new Date()),args,ip,agent,project);
+	public void addLogging(long id,String c,String m,String args,String ip,String agent,String project,Long app_id,Long api_id) {
+		executeUpdate(SQL.LOG_ADD, id,c,m,format(new Date()),args,ip,agent,project,app_id,api_id);
 	}
 	
 	public final Collection getCollection(Connection conn,
@@ -117,11 +117,11 @@ public class DBService {
 				for (int i = 0; i < parameters.length; i++) {
 					if (parameters[i] instanceof String) {
 						String paraStr = (String) parameters[i];
-						if (paraStr.length() > 255) {
-							statement.setCharacterStream(i + 1,
-									new java.io.StringReader(paraStr), paraStr
-											.length());
-						} else
+//						if (paraStr.length() > 255) {
+//							statement.setCharacterStream(i + 1,
+//									new java.io.StringReader(paraStr), paraStr
+//											.length());
+//						} else
 							statement.setString(i + 1, paraStr);
 					} else
 						statement.setObject(i + 1, parameters[i]);

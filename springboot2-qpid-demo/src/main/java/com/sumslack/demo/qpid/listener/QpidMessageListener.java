@@ -45,8 +45,8 @@ public class QpidMessageListener implements MessageListener {
 	private static QpidMessageListener instance = new QpidMessageListener();
 
 	private QpidMessageListener() {
-		//'com.sumslack.demo.qpid.listener.MyFailover'
-		String url = "amqp://guest:guest@test/?failover='roundrobin?cyclecount='com.sumslack.demo.qpid.listener.MyFailover''&brokerlist='tcp://192.168.1.63:5672?connectdelay='2000'&retries='2147483647'&connecttimeout='3600000''";
+		//failover='roundrobin?cyclecount='com.sumslack.demo.qpid.listener.MyFailover''
+		String url = "amqp://guest:guest@test/?closeWhenNoRoute='false'&brokerlist='tcp://192.168.1.63:5672?failover='nofailover'&connectdelay='2000'&retries='2147483647'&connecttimeout='3600000''";
 		this.q_cc = "TT55";
 		this.q_cc_dest = "TT55";
 
@@ -76,6 +76,19 @@ public class QpidMessageListener implements MessageListener {
 
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
+	}
+	
+	public void reconnect() {
+		try {
+			session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
+			String addr_cc = "ADDR:" + this.q_cc + "; {create: always,node:{ type: queue }}";
+			dest_cc = new AMQAnyDestination(addr_cc);
+			sender_cc = session.createProducer(dest_cc);
+			dest_consumer = new AMQAnyDestination("ADDR:" + this.q_cc_dest + "; {create: always,node:{ type: queue }}");
+			session.createConsumer(dest_consumer).setMessageListener(this);
+		}catch(Exception ex) {
+			ex.printStackTrace();
 		}
 	}
 

@@ -11,6 +11,7 @@
 	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	<zkclient.version>0.2</zkclient.version>
 	<zookeeper.version>3.4.9</zookeeper.version>
+	<version.demo.api>1.0.0</version.demo.api>
   </properties>
   
   <dependencies>
@@ -68,8 +69,8 @@
 	<!-- API接口项目依赖 -->
 	<dependency>
 		<groupId>com.sumslack.dubbo.api</groupId>
-		<artifactId>fenci</artifactId>
-	    <version>1.0.0</version>
+		<artifactId>fenci-api</artifactId>
+	    <version>${version.demo.api}</version>
 	</dependency>	
 	
 	<!-- 业务依赖包 -->

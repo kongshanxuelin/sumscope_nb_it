@@ -17,5 +17,8 @@
   	<module>com.sumslack.dubbo.api.fenci</module>
   	<module>springboot2-qpid-demo</module>
   	<module>java-patterndesign</module>
+  	<module>springboot2-thrift-server</module>
+  	<module>sockjs</module>
+  	<module>springboot2-sockjs</module>
   </modules>
 </project>

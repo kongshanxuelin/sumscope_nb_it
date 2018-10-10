@@ -13,6 +13,9 @@ import com.sumslack.logging.store.service.DBService;
 import com.sumslack.logging.store.service.RedisService;
 import com.sumslack.logging.store.service.RedisService.Channel;
 
+import cn.hutool.core.convert.Convert;
+import cn.hutool.crypto.symmetric.SymmetricAlgorithm;
+import cn.hutool.crypto.symmetric.SymmetricCrypto;
 import redis.clients.jedis.JedisPubSub;
 
 public class MyApplicationContext implements ApplicationListener<ApplicationReadyEvent>{
@@ -65,11 +68,20 @@ public class MyApplicationContext implements ApplicationListener<ApplicationRead
 						if(json!=null) {
 							String args = json.getString("args");
 							String action = json.getString("action");
+							String project = json.getString("prj");
+							//args中的数据需解密
+							if(action.startsWith("topic://")) {
+								byte[] key = project.getBytes(); //16位secKey
+								SymmetricCrypto aes = new SymmetricCrypto(SymmetricAlgorithm.AES, key);
+								args = new String(aes.decryptFromBase64(args));
+							}
 							String m = json.getString("m");
 							String ip = json.getString("ip");
 							String agent = json.getString("agent");
-							String project = json.getString("prj");
-							dbService.addLogging(ID_INIT + ++INDEX, action, m, args, ip, agent, project);							
+							
+							Long app_id = Convert.toLong(json.get("app_id"),0L);
+							Long api_id = Convert.toLong(json.get("api_id"),0L);
+							dbService.addLogging(ID_INIT + ++INDEX, action, m, args, ip, agent, project,app_id,api_id);							
 						}
 						
 						super.onMessage(channel, message);

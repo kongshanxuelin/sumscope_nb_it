@@ -14,5 +14,11 @@
 		<artifactId>hutool-all</artifactId>
 		<version>4.0.10</version>
 	</dependency>
+	
+	<dependency>
+		<groupId>com.sumslack</groupId>
+		<artifactId>cloud-common</artifactId>
+		<version>1.0.0</version>
+	</dependency>
   </dependencies>
 </project>
