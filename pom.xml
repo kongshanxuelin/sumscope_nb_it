@@ -20,5 +20,6 @@
   	<module>springboot2-thrift-server</module>
   	<module>sockjs</module>
   	<module>springboot2-sockjs</module>
+  	<module>com.sumslack.rxjava</module>
   </modules>
 </project>

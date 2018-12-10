@@ -1,5 +1,5 @@
 Configuration:  
-  status: warn  
+  status: debug  
   packages: com.sumslack.netty.logging
   Properties: 
     Property:         
@@ -28,14 +28,14 @@ Configuration:
       NettyIOAppender:
         - name: nettyIOAppender
           stype: mq
-          host: 122.227.138.62:23105
+          host: 127.0.0.1:23105
           app-name: dubbo.consumer.fin
   Loggers:
       Root:
         level: debug
         AppenderRef:
           - ref: CONSOLE
-#          - ref: ROLLING_FILE
+          - ref: ROLLING_FILE
       Logger:
         - name: com.sumslack.logging
           additivity: false
@@ -43,4 +43,4 @@ Configuration:
           AppenderRef:
             - ref: CONSOLE
  #           - ref: ROLLING_FILE
- #           - ref: nettyIOAppender
+            - ref: nettyIOAppender

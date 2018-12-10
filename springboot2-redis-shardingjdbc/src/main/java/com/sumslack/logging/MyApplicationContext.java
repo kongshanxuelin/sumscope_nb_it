@@ -50,7 +50,6 @@ public class MyApplicationContext implements ApplicationListener<ApplicationRead
 			 
 			 DBService dbService = ac.getBean(DBService.class);
 			 
-			 
 			 logger.info("##########application started.");
 				redisService.initRedis().sub(RedisService.Channel.api_controller2db,new JedisPubSub() {
 
@@ -64,16 +63,22 @@ public class MyApplicationContext implements ApplicationListener<ApplicationRead
 					public void onMessage(String channel, String message) {
 						//TODO: 存入日志统计系统或数据库 {"args":"{}","action":"com.sumslack.consumer.fx.controller.BondController","m":"detailSimple","ip:":"127.0.0.1"}
 						logger.info("###########redis onMessage："+channel+" -> " + message);
+						
 						JSONObject json = JSON.parseObject(message);
+						
+						logger.info(JSON.toJSONString(json));
+						
 						if(json!=null) {
 							String args = json.getString("args");
 							String action = json.getString("action");
 							String project = json.getString("prj");
 							//args中的数据需解密
 							if(action.startsWith("topic://")) {
-								byte[] key = project.getBytes(); //16位secKey
-								SymmetricCrypto aes = new SymmetricCrypto(SymmetricAlgorithm.AES, key);
-								args = new String(aes.decryptFromBase64(args));
+								if(!project.equals("1111111111111111")) {  //16个1无需解密
+									byte[] key = project.getBytes(); //16位secKey
+									SymmetricCrypto aes = new SymmetricCrypto(SymmetricAlgorithm.AES, key);
+									args = new String(aes.decryptFromBase64(args));									
+								}
 							}
 							String m = json.getString("m");
 							String ip = json.getString("ip");
