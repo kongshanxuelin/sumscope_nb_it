@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Implementation-Title: com.sumslack.rxjava
+Implementation-Version: 1.0.0
+Built-By: Administrator
+Implementation-Vendor-Id: com.sumslack.rxjava
+Build-Jdk: 1.8.0_131
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
+ ot-starter-parent/gzh/com.sumslack.rxjava
+Created-By: Maven Integration for Eclipse
+
