@@ -44,10 +44,10 @@ spring:
   profiles: dev
   redis:
     database: 0
-    host: 192.168.1.63
-    port: 6379
+    host: xxx
+    port: xxxx
     timeout: 10000
-    password: 1qaz2wsx
+    password: xxxxx
     jedis:
       pool:
         max-active: 20
@@ -57,9 +57,9 @@ spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://192.168.1.215:3306/springboot-demo?useUnicode=true&characterEncoding=utf8&autoReconnect=true
-    username: dev
-    password: 123456
+    url: jdbc:mysql://xxx:3306/springboot-demo?useUnicode=true&characterEncoding=utf8&autoReconnect=true
+    username: xxx
+    password: xxxx
     druid:
         initial-size: 1
         min-idle: 1
@@ -94,10 +94,10 @@ dubbo:
   registry:
     id: fx-dubbo-test
     protocol: zookeeper
-    address: 192.168.1.213:2181
+    address: xxxxxxx:2181
   protocol:
     id: dubbo
-    name: dubbo
+    name: xxx
     port: 20881
     status: server
     
